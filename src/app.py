@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv(verbose=True)
 SLACK_SIGNING_SECRET = os.getenv('SLACK_SIGNING_SECRET')
 SLACK_BOT_TOKEN = os.getenv('SLACK_BOT_TOKEN')
+CHANNEL_NAME=os.getenv("CHANNEL_NAME")
 
 from name import randname
 
@@ -149,9 +150,9 @@ def handle_submission(ack, body, client, view, logger):
                 ]
 
     if message_ts == "":
-        client.chat_postMessage(channel='bamboo', blocks=send_message)
+        client.chat_postMessage(channel=CHANNEL_NAME, blocks=send_message)
     else: 
-        client.chat_postMessage(channel='bamboo', thread_ts=message_ts, blocks=send_message)
+        client.chat_postMessage(channel=CHANNEL_NAME, thread_ts=message_ts, blocks=send_message)
 
 @app.action("reply")
 def actionbutton(ack, say):
@@ -159,4 +160,4 @@ def actionbutton(ack, say):
     say("Good")
 
 if __name__ == "__main__":
-    app.start(9999)
+    app.start(3000)
