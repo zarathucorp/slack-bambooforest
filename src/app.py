@@ -3,6 +3,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 from slack_bolt import App
+from slack_sdk.errors import SlackApiError
 
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
